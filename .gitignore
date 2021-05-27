@@ -1,0 +1,11 @@
+# IDEA
+.idea
+*.iml
+
+# Exclude basic Eclipse files.
+**/.project
+**/.classpath
+**/.settings/
+
+# Exclude generated classes/stuff folders
+**/target/
