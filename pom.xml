@@ -10,6 +10,12 @@
 	<description>EPL-licensed extensions for extra2: https://github.com/solf/extra2</description>
 	<url>https://github.com/solf/extra2-epl</url>
 	
+	<properties>
+		<io.github.solf.extra2.library.version>0.1.0</io.github.solf.extra2.library.version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
 	<licenses>
 		<license>
 			<name>Eclipse Public License - v 1.0</name>
@@ -31,12 +37,6 @@
 		<connection>scm:git:https://github.com/solf/extra2-epl.git</connection>
 		<url>https://github.com/solf/extra2-epl</url>
 	</scm>
-	
-	<properties>
-		<io.github.solf.extra2.library.version>0.1.0</io.github.solf.extra2.library.version>
-		
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 
 	<distributionManagement>
 		<snapshotRepository>
@@ -46,6 +46,12 @@
 	</distributionManagement>	
 	
 	<profiles>
+		<profile>
+			<id>trunk-dep-all</id>
+			<properties>
+				<io.github.solf.extra2.library.version>0.0.1-SNAPSHOT</io.github.solf.extra2.library.version>
+			</properties>
+		</profile>
 		<profile>
 			<id>example</id>
 			<build>
