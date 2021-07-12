@@ -23,8 +23,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.net.SocketTimeoutException;
 
-import javax.annotation.NonNullByDefault;
-
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.javatuples.Pair;
 import org.testng.annotations.Test;
 

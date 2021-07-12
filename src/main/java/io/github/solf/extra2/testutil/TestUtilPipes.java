@@ -19,8 +19,7 @@ import java.io.IOException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
-import javax.annotation.NonNullByDefault;
-
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.javatuples.Pair;
 
 /**

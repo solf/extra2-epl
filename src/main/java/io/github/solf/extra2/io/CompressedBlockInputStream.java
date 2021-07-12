@@ -45,7 +45,8 @@ import java.util.zip.Inflater;
 import java.util.zip.ZipException;
 
 import javax.annotation.Nullable;
-import javax.annotation.NonNullByDefault;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
 
 /**
  * Input stream that decompresses data.

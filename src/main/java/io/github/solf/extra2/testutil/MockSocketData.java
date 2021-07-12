@@ -23,8 +23,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import javax.annotation.NonNullByDefault;
-
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.javatuples.Pair;
 
 import io.github.solf.extra2.exception.AssertionException;
