@@ -11,7 +11,7 @@
 	<url>https://github.com/solf/extra2-epl</url>
 	
 	<properties>
-		<io.github.solf.extra2.library.version>2.1.1</io.github.solf.extra2.library.version>
+		<io.github.solf.extra2.library.version>2.2.0</io.github.solf.extra2.library.version>
 		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
