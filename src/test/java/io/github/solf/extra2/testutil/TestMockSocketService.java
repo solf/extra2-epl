@@ -15,6 +15,7 @@
  */
 package io.github.solf.extra2.testutil;
 
+import static io.github.solf.extra2.util.NullUtil.nn;
 import static io.github.solf.extra2.util.NullUtil.nnChecked;
 import static org.mockito.Mockito.verify;
 import static org.testng.Assert.assertEquals;
@@ -240,7 +241,7 @@ public class TestMockSocketService
 				assert false;
 			} catch (IllegalStateException e)
 			{
-				assert e.getMessage().contains("[2] connected mock sockets instead of exactly one") : e;
+				assert nn(e.getMessage()).contains("[2] connected mock sockets instead of exactly one") : e;
 			}
 			
 			// test getting back to one works
