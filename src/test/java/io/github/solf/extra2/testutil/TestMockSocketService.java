@@ -45,6 +45,32 @@ import io.github.solf.extra2.testutil.TestUtil;
 @NonNullByDefault
 public class TestMockSocketService
 {
+	/**
+	 * Mock address for testing connections.
+	 * <p>
+	 * These should (not-)resolve quickly!
+	 */
+	private static final String MOCK_ADDR = "addr.notexistdomain";
+	/**
+	 * Mock address for testing connections.
+	 * <p>
+	 * These should (not-)resolve quickly!
+	 */
+	private static final String MOCK_ADDR2 = "addr2.notexistdomain";
+	/**
+	 * Mock address for testing connections.
+	 * <p>
+	 * These should (not-)resolve quickly!
+	 */
+	private static final String MOCK_ADDR3 = "addr3.notexistdomain";
+	/**
+	 * Mock address for testing connections.
+	 * <p>
+	 * These should (not-)resolve quickly!
+	 */
+	private static final String MOCK_ADDR4 = "addr4.notexistdomain";
+
+
 	/** self-documenting */
 	@Test
 	public void testAssertNoConnectedSocketMocks() throws Exception
@@ -53,7 +79,7 @@ public class TestMockSocketService
 		
 		service.assertNoConnectedSocketMocks();
 		
-		service.connectSocket("addr", 123);
+		service.connectSocket(MOCK_ADDR, 123);
 		try
 		{
 			service.assertNoConnectedSocketMocks();
@@ -75,9 +101,9 @@ public class TestMockSocketService
 		
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			
 			MockSocketData socketData = service.getTheOnlyConnectedSocketMock();
 			assertEquals(socketData.getMockSocket(), mockSocket);
@@ -96,9 +122,9 @@ public class TestMockSocketService
 		
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123, 4567))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123, 4567))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 4567);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 4567);
 			
 			MockSocketData socketData = service.getAndClearTheOnlyConnectedSocketMock();
 			assertEquals(socketData.getMockSocket(), mockSocket);
@@ -117,18 +143,18 @@ public class TestMockSocketService
 		assertEquals(service.getAllConnectedSocketMocks().size(), 0);
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			assertEquals(service.getAllConnectedSocketMocks().size(), 1);
 			assertEquals(service.getAllConnectedSocketMocks().getFirst().getMockSocket(), mockSocket);
 			
-			Socket mockSocket2 = service.connectSocket("addr2", 234);
+			Socket mockSocket2 = service.connectSocket(MOCK_ADDR2, 234);
 			assertEquals(service.getAllConnectedSocketMocks().size(), 2);
 			assertEquals(service.getAllConnectedSocketMocks().getFirst().getMockSocket(), mockSocket);
 			assertEquals(service.getAllConnectedSocketMocks().getLast().getMockSocket(), mockSocket2);
 			
-			Socket mockSocket3 = service.connectSocket("addr3", 345);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 			LinkedBlockingDeque<MockSocketData> allMocks = service.getAllConnectedSocketMocks();
 			for (Socket ms : new Socket[] {mockSocket, mockSocket2, mockSocket3})
 			{
@@ -153,18 +179,18 @@ public class TestMockSocketService
 		assertEquals(service.getAllConnectedSocketMocksClone().size(), 0);
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			assertEquals(service.getAllConnectedSocketMocksClone().size(), 1);
 			assertEquals(service.getAllConnectedSocketMocksClone().getFirst().getMockSocket(), mockSocket);
 			
-			Socket mockSocket2 = service.connectSocket("addr2", 234);
+			Socket mockSocket2 = service.connectSocket(MOCK_ADDR2, 234);
 			assertEquals(service.getAllConnectedSocketMocksClone().size(), 2);
 			assertEquals(service.getAllConnectedSocketMocksClone().getFirst().getMockSocket(), mockSocket);
 			assertEquals(service.getAllConnectedSocketMocksClone().getLast().getMockSocket(), mockSocket2);
 			
-			Socket mockSocket3 = service.connectSocket("addr3", 345);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 			LinkedBlockingDeque<MockSocketData> allMocks = service.getAllConnectedSocketMocksClone();
 			for (Socket ms : new Socket[] {mockSocket, mockSocket2, mockSocket3})
 			{
@@ -186,16 +212,16 @@ public class TestMockSocketService
 		assertEquals(service.getAndClearAllConnectedSocketMocks().size(), 0);
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			LinkedBlockingDeque<MockSocketData> mocks = service.getAndClearAllConnectedSocketMocks();
 			service.assertNoConnectedSocketMocks();
 			assertEquals(mocks.size(), 1);
 			assertEquals(mocks.getFirst().getMockSocket(), mockSocket);
 			
-			Socket mockSocket2 = service.connectSocket("addr2", 234);
-			Socket mockSocket3 = service.connectSocket("addr3", 345);
+			Socket mockSocket2 = service.connectSocket(MOCK_ADDR2, 234);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 			mocks = service.getAndClearAllConnectedSocketMocks();
 			service.assertNoConnectedSocketMocks();
 			assertEquals(mocks.size(), 2);
@@ -226,15 +252,15 @@ public class TestMockSocketService
 		}
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			MockSocketData mockSocketData = service.getAndClearTheOnlyConnectedSocketMock();
 			service.assertNoConnectedSocketMocks();
 			assertEquals(mockSocketData.getMockSocket(), mockSocket);
 			
-			service.connectSocket("addr2", 234);
-			@SuppressWarnings("resource") Socket mockSocket3 = service.connectSocket("addr3", 345);
+			service.connectSocket(MOCK_ADDR2, 234);
+			@SuppressWarnings("resource") Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 			try
 			{
 				mockSocketData = service.getAndClearTheOnlyConnectedSocketMock();
@@ -271,19 +297,19 @@ public class TestMockSocketService
 		}
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
 			service.getLastConnectedSocketMock();
 			
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			assertSame(service.getLastConnectedSocketMock().getMockSocket(), mockSocket);
 			
-			Socket mockSocket2 = service.connectSocket("addr2", 234);
-			verify(mockSocket2).connect(new InetSocketAddress("addr2", 234), 0);
+			Socket mockSocket2 = service.connectSocket(MOCK_ADDR2, 234);
+			verify(mockSocket2).connect(new InetSocketAddress(MOCK_ADDR2, 234), 0);
 			assertSame(service.getLastConnectedSocketMock().getMockSocket(), mockSocket2);
 			
-			Socket mockSocket3 = service.connectSocket("addr3", 345);
-			verify(mockSocket3).connect(new InetSocketAddress("addr3", 345), 0);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
+			verify(mockSocket3).connect(new InetSocketAddress(MOCK_ADDR3, 345), 0);
 			assertSame(service.getLastConnectedSocketMock().getMockSocket(), mockSocket3);
 			
 			assertEquals(service.getAllConnectedSocketMocks().size(), 3);
@@ -308,13 +334,13 @@ public class TestMockSocketService
 		}
 		service.assertNoConnectedSocketMocks();
 		
-		try (Socket mockSocket = service.connectSocket("addr", 123))
+		try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 		{
-			verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+			verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 			assertSame(service.getTheOnlyConnectedSocketMock().getMockSocket(), mockSocket);
 			
-			Socket mockSocket2 = service.connectSocket("addr2", 234);
-			verify(mockSocket2).connect(new InetSocketAddress("addr2", 234), 0);
+			Socket mockSocket2 = service.connectSocket(MOCK_ADDR2, 234);
+			verify(mockSocket2).connect(new InetSocketAddress(MOCK_ADDR2, 234), 0);
 			try
 			{
 				service.getTheOnlyConnectedSocketMock();
@@ -324,8 +350,8 @@ public class TestMockSocketService
 				assert e.toString().contains("[2] connected mock sockets instead of exactly one") : e;
 			}
 			
-			Socket mockSocket3 = service.connectSocket("addr3", 345);
-			verify(mockSocket3).connect(new InetSocketAddress("addr3", 345), 0);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
+			verify(mockSocket3).connect(new InetSocketAddress(MOCK_ADDR3, 345), 0);
 			try
 			{
 				service.getTheOnlyConnectedSocketMock();
@@ -365,14 +391,14 @@ public class TestMockSocketService
 			}
 			service.assertNoConnectedSocketMocks();
 			
-			try (Socket mockSocket = service.connectSocket("addr", 123))
+			try (Socket mockSocket = service.connectSocket(MOCK_ADDR, 123))
 			{
-				verify(mockSocket).connect(new InetSocketAddress("addr", 123), 0);
+				verify(mockSocket).connect(new InetSocketAddress(MOCK_ADDR, 123), 0);
 				assertSame(service.waitForAndClearTheOnlyConnectedSocketMock(100).getMockSocket(), mockSocket);
 				service.assertNoConnectedSocketMocks();
 				
-				service.connectSocket("addr2", 234);
-				Socket mockSocket3 = service.connectSocket("addr3", 345);
+				service.connectSocket(MOCK_ADDR2, 234);
+				Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 				try
 				{
 					service.waitForAndClearTheOnlyConnectedSocketMock(100);
@@ -389,13 +415,13 @@ public class TestMockSocketService
 	
 				// Test asynchronous socket connection (the 'wait for' part).
 				{
-					TestUtil.runAsynchronously(() -> {Thread.sleep(2000);service.connectSocket("addr4", 456);});
+					TestUtil.runAsynchronously(() -> {Thread.sleep(2000);service.connectSocket(MOCK_ADDR4, 456);});
 					long start = System.currentTimeMillis();
 					MockSocketData mockSocketData = service.waitForAndClearTheOnlyConnectedSocketMock(3000);
 					long duration = System.currentTimeMillis() - start;
 					assert duration > 1000 : duration;
 					assert duration < 3000 : duration;
-					verify(mockSocketData.getMockSocket()).connect(new InetSocketAddress("addr4", 456), 0);
+					verify(mockSocketData.getMockSocket()).connect(new InetSocketAddress(MOCK_ADDR4, 456), 0);
 				}
 				
 				// Test 'waitFor' interruption.
