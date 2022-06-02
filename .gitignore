@@ -9,3 +9,5 @@
 
 # Exclude generated classes/stuff folders
 **/target/
+
+/test-output/
