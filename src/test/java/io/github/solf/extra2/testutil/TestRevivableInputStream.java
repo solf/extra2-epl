@@ -27,9 +27,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.javatuples.Pair;
 import org.testng.annotations.Test;
 
-import io.github.solf.extra2.testutil.RevivableInputStream;
-import io.github.solf.extra2.testutil.RevivableOutputStream;
-import io.github.solf.extra2.testutil.TestUtil;
 import io.github.solf.extra2.testutil.TestUtil.AsyncTestRunner;
 
 /**

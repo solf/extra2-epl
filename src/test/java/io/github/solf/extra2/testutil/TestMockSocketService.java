@@ -33,9 +33,6 @@ import org.testng.annotations.Test;
 import io.github.solf.extra2.concurrent.exception.WAInterruptedException;
 import io.github.solf.extra2.concurrent.exception.WATimeoutException;
 import io.github.solf.extra2.exception.AssertionException;
-import io.github.solf.extra2.testutil.MockSocketData;
-import io.github.solf.extra2.testutil.MockSocketService;
-import io.github.solf.extra2.testutil.TestUtil;
 
 /**
  * Tests for {@link MockSocketService}

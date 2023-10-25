@@ -26,8 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.testng.annotations.Test;
 
-import io.github.solf.extra2.testutil.MockSocketData;
-import io.github.solf.extra2.testutil.TestUtil;
 import io.github.solf.extra2.testutil.TestUtil.AsyncTestRunner;
 
 /**
