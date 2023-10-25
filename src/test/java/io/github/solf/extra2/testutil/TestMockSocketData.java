@@ -20,6 +20,7 @@ import static org.testng.Assert.assertEquals;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PipedInputStream;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,8 +35,21 @@ import io.github.solf.extra2.testutil.TestUtil.AsyncTestRunner;
  * @author Sergey Olefir
  */
 @NonNullByDefault
+@SuppressWarnings("resource") // without suppressing this too many annoying warnings in newer Eclipse
 public class TestMockSocketData
 {
+	/**
+	 * Exists purely to generate 'resource' warning in older Eclipse versions
+	 * so that @SuppressWarnings("resource") above doesn't produce 'unused
+	 * suppression' warning.
+	 */
+	@SuppressWarnings("unused")
+	private void generateOldEclipseResourceWarning() throws IOException
+	{
+		
+		PipedInputStream pis = new PipedInputStream();
+	}
+	
 	/** self-documenting */
 	@Test
 	public void testSocketInputPipe() throws Exception

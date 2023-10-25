@@ -21,6 +21,8 @@ import static org.testng.Assert.assertNotEquals;
 import java.awt.AWTError;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PipedInputStream;
 import java.net.SocketTimeoutException;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -35,8 +37,21 @@ import io.github.solf.extra2.testutil.TestUtil.AsyncTestRunner;
  * @author Sergey Olefir
  */
 @NonNullByDefault
+@SuppressWarnings("resource") // without suppressing this several annoying warnings in newer Eclipse
 public class TestRevivableInputStream
 {
+	/**
+	 * Exists purely to generate 'resource' warning in older Eclipse versions
+	 * so that @SuppressWarnings("resource") above doesn't produce 'unused
+	 * suppression' warning.
+	 */
+	@SuppressWarnings("unused")
+	private void generateOldEclipseResourceWarning() throws IOException
+	{
+		
+		PipedInputStream pis = new PipedInputStream();
+	}
+	
 	/** self-documenting */
 	@Test
 	public void testQueueExceptionForNextRead() throws Exception

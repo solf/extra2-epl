@@ -40,6 +40,7 @@ import io.github.solf.extra2.exception.AssertionException;
  * @author Sergey Olefir
  */
 @NonNullByDefault
+@SuppressWarnings("resource") // without suppressing this too many annoying warnings in Eclipse
 public class TestMockSocketService
 {
 	/**
@@ -131,7 +132,6 @@ public class TestMockSocketService
 	}
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testGetAllConnectedSocketMocks() throws Exception
 	{
@@ -167,7 +167,6 @@ public class TestMockSocketService
 	
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testGetAllConnectedSocketMocksClone() throws Exception
 	{
@@ -200,7 +199,6 @@ public class TestMockSocketService
 	}
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testGetAndClearAllConnectedSocketMocks() throws Exception
 	{
@@ -257,7 +255,7 @@ public class TestMockSocketService
 			assertEquals(mockSocketData.getMockSocket(), mockSocket);
 			
 			service.connectSocket(MOCK_ADDR2, 234);
-			@SuppressWarnings("resource") Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
+			Socket mockSocket3 = service.connectSocket(MOCK_ADDR3, 345);
 			try
 			{
 				mockSocketData = service.getAndClearTheOnlyConnectedSocketMock();
@@ -278,7 +276,6 @@ public class TestMockSocketService
 	
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testGetLastConnectedSocketMock() throws Exception
 	{
@@ -315,7 +312,6 @@ public class TestMockSocketService
 	
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testGetTheOnlyConnectedSocketMock() throws Exception
 	{
@@ -370,7 +366,6 @@ public class TestMockSocketService
 	
 	
 	/** self-documenting */
-	@SuppressWarnings("resource")
 	@Test
 	public void testWaitForTheOnlyConnectedSocketMock() throws Exception
 	{
