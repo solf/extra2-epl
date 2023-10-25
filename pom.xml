@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>io.github.solf</groupId>
 			<artifactId>nullanno</artifactId>
-			<version>3.0.0</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -134,7 +134,7 @@
 				<!-- Release to Sonatype -->
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.7</version>
+				<version>1.6.13</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
@@ -186,7 +186,7 @@
 				<!-- 'delombok' (generate expanded source) into given directory for javadoc processing -->
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok-maven-plugin</artifactId>
-				<version>1.18.12.0</version>
+				<version>1.18.20.0</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -204,18 +204,29 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
+				<version>3.6.0</version>
 				<executions>
+					<execution>
+						<id>update</id>
+						<goals>
+							<goal>fix</goal>
+						</goals>
+						<configuration>
+ 					        <defaultVersion>${project.version}</defaultVersion>
+						</configuration>
+					</execution>
 					<execution>
 						<id>attach-javadocs</id>
 						<goals>
 							<goal>jar</goal>
 						</goals>
 						<configuration>
-							<!-- Disables annoying Javadoc validation in 1.8 -->
-							<additionalparam>-Xdoclint:none</additionalparam>
- 					        <defaultVersion>${project.version}</defaultVersion>
- 					        <!-- Where to pick up source (in this case delomboked source is used) -->
+							<!-- Tries to bypass all the Javadoc validation using the newer Maven plugin version -->
+							<doclint>none</doclint>
+							<additionalOptions>--ignore-source-errors</additionalOptions>
+							<failOnError>false</failOnError>
+							<quiet>true</quiet>
+							<!-- Where to pick up source (in this case delomboked source is used) -->
 					        <sourcepath>target/generated-sources/delombok</sourcepath>
 						</configuration>
 					</execution>
