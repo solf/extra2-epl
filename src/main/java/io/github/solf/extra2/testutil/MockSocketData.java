@@ -60,6 +60,7 @@ public class MockSocketData
 	 * 
 	 * @see MockSocketService#warmUp()
 	 */
+	@SuppressWarnings("all") // suppress 'all' rather than 'resource' for warning-compatibility with older Eclipse
 	/*package*/ static void warmUp()
 	{
 		mock(Socket.class); // this is an actual warm-up routine
